@@ -38,6 +38,12 @@
 #include <time.h>
 #include <math.h>
 
+#ifdef FREERTOS_ENABLED
+#include "freeRTOS.h"
+#include "task.h"
+#include "cmsis_os.h"
+#endif
+
 extern I2C_HandleTypeDef VL53L1__PORT;
 
 int8_t VL53L1_WriteMulti( uint16_t dev, uint16_t index, uint8_t *pdata, uint32_t count) {
