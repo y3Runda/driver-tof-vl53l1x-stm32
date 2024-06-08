@@ -14,6 +14,8 @@ extern "C"
 {
 #endif
 
+#define FREERTOS__ENABLED // comment if freeRTOS is not used
+
 #define VL53L1__PORT hi2c1
 #define VL53L1__ADDR 0x52
 

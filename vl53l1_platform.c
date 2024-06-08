@@ -118,9 +118,14 @@ uint8_t TOF__Init(){
 		return (status);
 	}
 #endif
-	HAL_Delay(4);
 
-	//check if VL53L1X is alive and kicking. Remove MASKREV if VL53L1
+#ifdef FREERTOS__ENABLED
+	osDelay(4);
+#else
+	HAL_Delay(4);
+#endif
+
+	// Check if VL53L1X is alive and kicking. Remove MASKREV if VL53L1
 	VL53L1_ReadMulti(VL53L1__ADDR, VL53L1__MODELID_INDEX, refRegs, 4);
 	if ((refRegs[0]!=VL53L1__MODELID_VALUE) || (refRegs[1]!=VL53L1__MODULETYPE_VALUE) || (refRegs[2]!=VL53L1__MASKREV_VALUE)) {
 		printf("ERROR: VL53L1X is not alive\r\n");
