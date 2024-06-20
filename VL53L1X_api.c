@@ -218,7 +218,7 @@ VL53L1X_ERROR VL53L1X_SetI2CAddress(uint16_t dev, uint8_t new_address)
 {
 	VL53L1X_ERROR status = 0;
 
-	status |= VL53L1_WrByte(dev, VL53L1_I2C_SLAVE__DEVICE_ADDRESS, new_address >> 1);
+	status |= VL53L1_WrByte(dev, VL53L1_I2C_SLAVE__DEVICE_ADDRESS, new_address);
 	return status;
 }
 
@@ -663,13 +663,7 @@ VL53L1X_ERROR  VL53L1X_GetOffset(uint16_t dev, int16_t *offset)
 	status |= VL53L1_RdWord(dev,ALGO__PART_TO_PART_RANGE_OFFSET_MM, &Temp);
 	Temp = Temp<<3;
 	Temp = Temp>>5;
-   *offset = (int16_t)(Temp);
-
-   if(*offset > 1024) 
-   {
-		*offset = *offset - 2048;
-   }
-
+	*offset = (int16_t)(Temp);
 	return status;
 }
 
